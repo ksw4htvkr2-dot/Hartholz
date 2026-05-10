@@ -11,56 +11,68 @@
   <meta property="og:image" content="https://hartholz.at/storage/Essplatz-Bangkirai.jpg">
   <link rel="stylesheet" href="style.css">
   <style>
-    .pair {
+    .collage {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 8px;
+      padding: 0 5vw;
+      margin-bottom: 5rem;
+    }
+    .ci { overflow: hidden; position: relative; cursor: pointer; }
+    .ci img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s; filter: saturate(92%); }
+    .ci:hover img { transform: scale(1.05); filter: saturate(108%); }
+    .ci-lbl {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1rem 0.9rem 0.6rem;
+      background: linear-gradient(to top, rgba(26,18,10,0.7), transparent);
+      color: #fff; font-size: 0.7rem; letter-spacing: 0.14em;
+      text-transform: uppercase; opacity: 0; transition: opacity 0.3s;
+    }
+    .ci:hover .ci-lbl { opacity: 1; }
+    .ca { grid-column: 1/5;  grid-row: 1/3; }
+    .cb { grid-column: 5/9;  grid-row: 1; }
+    .cc { grid-column: 9/13; grid-row: 1; }
+    .cd { grid-column: 5/9;  grid-row: 2; }
+    .ce { grid-column: 9/13; grid-row: 2; }
+
+    .pair {
+      display: grid; grid-template-columns: 1fr 1fr;
       margin: 0 10vw 2.5rem 10vw;
-      align-items: stretch;
       box-shadow: 0 4px 24px rgba(61,43,31,0.07);
     }
     .pair-img { overflow: hidden; aspect-ratio: 4/3; }
     .pair.rev .pair-img { order: 2; }
     .pair.rev .pair-text { order: 1; }
-    .pair-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease;
-    }
+    .pair-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s; }
     .pair:hover .pair-img img { transform: scale(1.04); }
     .pair-text {
-      padding: 2.5rem 3rem;
-      background: var(--cream);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 2.5rem 3rem; background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
     }
     .pair.rev .pair-text { background: var(--warm-white); }
-    .pair-text h3 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--dark);
-      margin-bottom: 0.6rem;
-    }
-    .pair-text p { font-size: 0.95rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.25rem; }
-    .pairs-section { padding: 0 0 4rem; }
+    .pair-text .pair-label { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .pair-text h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 0.75rem; }
+    .pair-text p { font-size: 0.94rem; color: var(--mid); line-height: 1.85; }
+
     @media (max-width: 900px) {
+      .collage { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 6px; }
+      .ci { aspect-ratio: 4/3; }
+      .ca { grid-column: 1/3; grid-row: auto; aspect-ratio: 16/9; }
+      .cb,.cc,.cd,.ce { grid-column: auto; }
       .pair { grid-template-columns: 1fr; margin: 0 5vw 1.5rem; }
-      .pair.rev .pair-img { order: 0; }
-      .pair.rev .pair-text { order: 0; }
+      .pair.rev .pair-img,.pair.rev .pair-text { order: 0; }
       .pair-text { padding: 1.75rem; }
+    }
+    @media (max-width: 560px) {
+      .collage { grid-template-columns: 1fr; }
+      .ca { aspect-ratio: 4/3; grid-column: auto; }
     }
   </style>
 </head>
 <body class="nav-always-white">
-
 <nav>
-  <a href="index.html">
-    <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo">
-  </a>
+  <a href="index.html"><img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo"></a>
   <ul class="nav-links">
     <li><a href="wohnmoebel.html">Wohnmöbel</a></li>
     <li><a href="gartenmoebel.html">Gartenmöbel</a></li>
@@ -88,76 +100,47 @@
 <section>
   <div class="reveal">
     <p class="section-label">Außenbereich</p>
-    <h2 class="section-title">Ihr Garten –<br><em>Eine Oase</em></h2>
+    <h2 class="section-title">Ihr Garten –<br><em>Eine Oase der Individualität</em></h2>
     <div class="divider"></div>
     <p class="section-body">
-      Ihr Garten oder Ihre Terrasse ist eine Erweiterung Ihres Wohnraums. Von der eleganten Gartenbank bis zur einladenden Lounge-Ecke – wir gestalten Ihre Außenbereiche so einzigartig wie Ihr Zuhause.
+      Entdecken Sie die Kunst des Tischlerhandwerks im Freien. Ihr Garten oder Ihre Terrasse ist eine Erweiterung Ihres Wohnraums – ein Ort der Ruhe und Schönheit. Die Möbel bieten Ihnen nicht nur Sitzgelegenheiten, sondern sind auch Ausdruck Ihrer Persönlichkeit und Ihres Stils.
     </p>
   </div>
 </section>
 
-<div class="pairs-section">
+<div class="collage reveal">
+  <div class="ci ca"><img src="https://hartholz.at/storage/Baumbank.jpg" alt="Baumbank" loading="lazy"><span class="ci-lbl">Outdoor-Eleganz</span></div>
+  <div class="ci cb"><img src="https://hartholz.at/storage/Gartentisch-Hartholz.jpg" alt="Gartentisch" loading="lazy"><span class="ci-lbl">Naturverbundenes Design</span></div>
+  <div class="ci cc"><img src="https://hartholz.at/storage/Sphaere.jpg" alt="Sphäre" loading="lazy"><span class="ci-lbl">Langlebige Raffinesse</span></div>
+  <div class="ci cd"><img src="https://hartholz.at/storage/Gartenbank.jpg" alt="Gartenbank" loading="lazy"><span class="ci-lbl">Gartenbank</span></div>
+  <div class="ci ce"><img src="https://hartholz.at/storage/Essplatz-Eiche.jpg" alt="Essplatz Eiche" loading="lazy"><span class="ci-lbl">Essplatz Eiche</span></div>
+</div>
 
-  <div class="pair reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Baumbank.jpg" alt="Baumbank" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Outdoor</p>
-      <h3>Baumbank</h3>
-      <p>Elegante Baumbank aus Hartholz – ein natürlicher Blickfang für jeden Garten, langlebig und wetterfest.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
+<div class="pair reveal">
+  <div class="pair-img"><img src="https://hartholz.at/storage/Gartenhuette.jpg" alt="Gartenhütte" loading="lazy"></div>
+  <div class="pair-text">
+    <p class="pair-label">Maßgefertigt</p>
+    <h3>Maßgefertigte Stücke für Ihren Außenbereich</h3>
+    <p>Jeder Garten und jede Terrasse hat seine eigene Persönlichkeit. Wir hören auf Ihre Wünsche und Vorstellungen, um Gartenmöbel zu kreieren, die perfekt in Ihre Außenwelt passen. Ob gemütliche Sitzecken, praktische Tische oder entspannende Liegestühle – wir setzen Ihre Ideen um und verwandeln Ihren Garten in eine Wohlfühloase.</p>
   </div>
+</div>
 
-  <div class="pair rev reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Gartentisch-Hartholz.jpg" alt="Gartentisch" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Terrasse</p>
-      <h3>Gartentisch</h3>
-      <p>Naturverbundenes Design trifft auf höchste Verarbeitungsqualität – Gartentische nach Ihren Maßen.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
+<div class="pair rev reveal">
+  <div class="pair-img"><img src="https://hartholz.at/storage/Essplatz-Bangkirai.jpg" alt="Essplatz Bangkirai" loading="lazy"></div>
+  <div class="pair-text">
+    <p class="pair-label">Langlebigkeit</p>
+    <h3>Langlebige Eleganz für Ihren Garten</h3>
+    <p>Unsere Gartenmöbel sind nicht nur ein Blickfang, sondern auch eine nachhaltige Wahl. Wir setzen auf Materialien, die nicht nur die Umwelt schonen, sondern auch die Zeit überdauern. So können Sie über Jahre hinweg die Schönheit und Funktionalität Ihrer Gartenmöbel genießen.</p>
   </div>
+</div>
 
-  <div class="pair reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Gartenbank.jpg" alt="Gartenbank" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Sitzen</p>
-      <h3>Gartenbank</h3>
-      <p>Gemütliche Gartenbänke aus wetterbeständigem Hartholz – perfekt für entspannte Stunden im Freien.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
+<div class="pair reveal">
+  <div class="pair-img"><img src="https://hartholz.at/storage/Gartentisch-Hartholz.jpg" alt="Gartentisch" loading="lazy"></div>
+  <div class="pair-text">
+    <p class="pair-label">Natur & Handwerk</p>
+    <h3>Natur & Handwerk in perfekter Harmonie</h3>
+    <p>In unserer Werkstatt entstehen Gartenmöbel, die nicht nur optisch überzeugen, sondern auch funktional und langlebig sind. Wir verwenden hochwertige, wetterbeständige Materialien und kombinieren diese mit traditioneller Handwerkskunst, um Möbel zu schaffen, die jedem Wetter standhalten und gleichzeitig ein stilvolles Ambiente bieten.</p>
   </div>
-
-  <div class="pair rev reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Essplatz-Eiche.jpg" alt="Essplatz Eiche" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Essplatz</p>
-      <h3>Essplatz Eiche</h3>
-      <p>Edler Essplatz aus massiver Eiche – für unvergessliche Abende im Garten oder auf der Terrasse.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
-  </div>
-
-  <div class="pair reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Sphaere.jpg" alt="Sphäre" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Skulptur</p>
-      <h3>Sphäre</h3>
-      <p>Außergewöhnliche Holzskulpturen und Gartendekoration – wo Handwerk zur Kunst wird.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
-  </div>
-
 </div>
 
 <div class="cta-strip">
@@ -191,7 +174,7 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 HARTHOLZ Sascha Kraus</span>
-    <div style="display:flex; gap:1.5rem;">
+    <div style="display:flex;gap:1.5rem;">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
     </div>
