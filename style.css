@@ -37,34 +37,39 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 5vw;
-  transition: background 0.4s, box-shadow 0.4s;
-}
-
-nav.scrolled {
   background: rgba(250, 248, 244, 0.98);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--border);
 }
 
-body.nav-always-white nav {
-  background: rgba(250, 248, 244, 0.98);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 var(--border);
-}
-
-body.nav-always-white nav .nav-links a { color: var(--dark); }
-body.nav-always-white nav .nav-links a.active { color: var(--dark); }
-body.nav-always-white .nav-logo { filter: brightness(0); opacity: 0.85; }
-
+/* Black logo on homepage (default) */
 .nav-logo {
   height: 44px;
   width: auto;
-  filter: none;
-  opacity: 1;
+  filter: brightness(0);
+  opacity: 0.85;
   transition: filter 0.3s, opacity 0.3s;
 }
 
-nav.scrolled .nav-logo { filter: brightness(0); opacity: 0.85; }
+/* Colored logo on subpages */
+body.nav-always-white .nav-logo {
+  filter: none;
+  opacity: 1;
+}
+
+/* Nav links always dark */
+.nav-links a {
+  color: var(--dark);
+}
+
+body.nav-always-white nav .nav-links a { color: var(--dark); }
+body.nav-always-white nav .nav-links a.active { color: var(--wood); }
+
+/* Hamburger always dark */
+.hamburger span { background: var(--dark); }
+body.nav-always-white .hamburger span { background: var(--dark); }
+.hamburger.open span { background: var(--dark) !important; }
 
 .nav-links {
   display: flex;
@@ -74,7 +79,7 @@ nav.scrolled .nav-logo { filter: brightness(0); opacity: 0.85; }
 
 .nav-links a {
   text-decoration: none;
-  color: rgba(255,255,255,0.9);
+  color: var(--dark);
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   font-size: 0.78rem;
@@ -85,9 +90,7 @@ nav.scrolled .nav-logo { filter: brightness(0); opacity: 0.85; }
   transition: color 0.3s;
 }
 
-.nav-links a.active { color: rgba(255,255,255,0.95); }
-nav.scrolled .nav-links a { color: var(--dark); }
-nav.scrolled .nav-links a.active { color: var(--dark); }
+.nav-links a.active { color: var(--wood); }
 
 .nav-links a::after {
   content: '';
