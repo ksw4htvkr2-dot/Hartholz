@@ -11,56 +11,68 @@
   <meta property="og:image" content="https://hartholz.at/storage/Kueche-Dunkel-6.jpg">
   <link rel="stylesheet" href="style.css">
   <style>
-    .pair {
+    .collage {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 8px;
+      padding: 0 5vw;
+      margin-bottom: 5rem;
+    }
+    .ci { overflow: hidden; position: relative; cursor: pointer; }
+    .ci img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s; filter: saturate(92%); }
+    .ci:hover img { transform: scale(1.05); filter: saturate(108%); }
+    .ci-lbl {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1rem 0.9rem 0.6rem;
+      background: linear-gradient(to top, rgba(26,18,10,0.7), transparent);
+      color: #fff; font-size: 0.7rem; letter-spacing: 0.14em;
+      text-transform: uppercase; opacity: 0; transition: opacity 0.3s;
+    }
+    .ci:hover .ci-lbl { opacity: 1; }
+    .ca { grid-column: 1/6;  grid-row: 1/3; }
+    .cb { grid-column: 6/9;  grid-row: 1; }
+    .cc { grid-column: 9/13; grid-row: 1; }
+    .cd { grid-column: 6/10; grid-row: 2; }
+    .ce { grid-column: 10/13;grid-row: 2; }
+
+    .pair {
+      display: grid; grid-template-columns: 1fr 1fr;
       margin: 0 10vw 2.5rem 10vw;
-      align-items: stretch;
       box-shadow: 0 4px 24px rgba(61,43,31,0.07);
     }
     .pair-img { overflow: hidden; aspect-ratio: 4/3; }
     .pair.rev .pair-img { order: 2; }
     .pair.rev .pair-text { order: 1; }
-    .pair-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease;
-    }
+    .pair-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s; }
     .pair:hover .pair-img img { transform: scale(1.04); }
     .pair-text {
-      padding: 2.5rem 3rem;
-      background: var(--cream);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 2.5rem 3rem; background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
     }
     .pair.rev .pair-text { background: var(--warm-white); }
-    .pair-text h3 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--dark);
-      margin-bottom: 0.6rem;
-    }
-    .pair-text p { font-size: 0.95rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.25rem; }
-    .pairs-section { padding: 0 0 4rem; }
+    .pair-text .pair-label { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .pair-text h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 0.75rem; }
+    .pair-text p { font-size: 0.94rem; color: var(--mid); line-height: 1.85; }
+
     @media (max-width: 900px) {
+      .collage { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 6px; }
+      .ci { aspect-ratio: 4/3; }
+      .ca { grid-column: 1/3; grid-row: auto; aspect-ratio: 16/9; }
+      .cb,.cc,.cd,.ce { grid-column: auto; }
       .pair { grid-template-columns: 1fr; margin: 0 5vw 1.5rem; }
-      .pair.rev .pair-img { order: 0; }
-      .pair.rev .pair-text { order: 0; }
+      .pair.rev .pair-img,.pair.rev .pair-text { order: 0; }
       .pair-text { padding: 1.75rem; }
+    }
+    @media (max-width: 560px) {
+      .collage { grid-template-columns: 1fr; }
+      .ca { aspect-ratio: 4/3; grid-column: auto; }
     }
   </style>
 </head>
 <body class="nav-always-white">
-
 <nav>
-  <a href="index.html">
-    <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo">
-  </a>
+  <a href="index.html"><img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo"></a>
   <ul class="nav-links">
     <li><a href="wohnmoebel.html">Wohnmöbel</a></li>
     <li><a href="gartenmoebel.html">Gartenmöbel</a></li>
@@ -88,76 +100,47 @@
 <section>
   <div class="reveal">
     <p class="section-label">Unikate</p>
-    <h2 class="section-title">Wo Ihre Träume<br><em>Form annehmen</em></h2>
+    <h2 class="section-title">Einzigartigkeit<br><em>in jedem Detail</em></h2>
     <div class="divider"></div>
     <p class="section-body">
-      In unserer Welt des Handwerks gibt es keine Grenzen, nur Möglichkeiten. Ob einzigartige Wohnaccessoires oder speziell angefertigte Möbelstücke – wir setzen Ihre Ideen um.
+      In unserer Welt des Handwerks gibt es keine Grenzen, nur Möglichkeiten. Sie träumen von einem Möbelstück, das so einzigartig ist wie Sie selbst? Bei uns wird Ihr Traum zur Wirklichkeit. Egal, ob es sich um einzigartige Wohnaccessoires oder um speziell angefertigte Möbelstücke handelt – wir setzen Ihre Ideen um.
     </p>
   </div>
 </section>
 
-<div class="pairs-section">
+<div class="collage reveal">
+  <div class="ci ca"><img src="https://hartholz.at/storage/Kueche-Dunkel-6.jpg" alt="Küche" loading="lazy"><span class="ci-lbl">Innovationskunst</span></div>
+  <div class="ci cb"><img src="https://hartholz.at/storage/Sonderanfertigung-Fahrrad.jpg" alt="Fahrrad" loading="lazy"><span class="ci-lbl">Design-Avantgarde</span></div>
+  <div class="ci cc"><img src="https://hartholz.at/storage/Wohnmoebel-7.jpg" alt="Sideboard" loading="lazy"><span class="ci-lbl">Einzigartige Kreationen</span></div>
+  <div class="ci cd"><img src="https://hartholz.at/storage/Wohnmoebel-10.jpg" alt="Wohnmöbel" loading="lazy"><span class="ci-lbl">Wohnmöbel</span></div>
+  <div class="ci ce"><img src="https://hartholz.at/storage/Sidrboard-mit-Katzenhoehle.jpg" alt="Sideboard mit Katzenhöhle" loading="lazy"><span class="ci-lbl">Sideboard</span></div>
+</div>
 
-  <div class="pair reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Kueche-Dunkel-6.jpg" alt="Küche" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Innovationskunst</p>
-      <h3>Designküche</h3>
-      <p>Küchen als Kunstwerk – individuell geplant, millimetergenau gefertigt, unverwechselbar im Stil.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
+<div class="pair reveal">
+  <div class="pair-img"><img src="https://hartholz.at/storage/High-End-Lautsprecher.jpg" alt="High End Lautsprecher" loading="lazy"></div>
+  <div class="pair-text">
+    <p class="pair-label">Ihre Vision</p>
+    <h3>Ihre Vision verwandelt in ein Unikat</h3>
+    <p>Bei uns entstehen nicht nur Möbel, sondern maßgeschneiderte Träume. Expertise im Tischlerhandwerk, gepaart mit kreativer Freiheit, ermöglicht es uns, für jedes Ihrer Projekte außergewöhnliche Lösungen zu kreieren. Ob es um einzigartige Wohnmöbel oder speziell gefertigte Möbelstücke geht – Ihre Vision wird lebendig.</p>
   </div>
+</div>
 
-  <div class="pair rev reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Sonderanfertigung-Fahrrad.jpg" alt="Sonderanfertigung Fahrrad" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Sonderanfertigung</p>
-      <h3>Fahrradhalterung</h3>
-      <p>Wer sagt, Holz ist nur für Möbel? Diese maßgefertigte Fahrradhalterung ist ein Beweis fürs Gegenteil.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
+<div class="pair rev reveal">
+  <div class="pair-img"><img src="https://hartholz.at/storage/Esstisch-2.jpg" alt="Esstisch" loading="lazy"></div>
+  <div class="pair-text">
+    <p class="pair-label">Kreativität</p>
+    <h3>Grenzenlose Kreativität, die Form annimmt</h3>
+    <p>Jedes Projekt bei uns beginnt mit einer Idee – Ihrer Idee. Ihre Vorstellungen sind der Nährboden, auf dem wir unsere Fähigkeiten und Erfahrungen ausspielen, um außergewöhnliche Stücke zu erschaffen. Diese Werke sind nicht nur funktional, sondern wahre Kunstwerke, die die Grenzen der Kreativität ausloten.</p>
   </div>
+</div>
 
-  <div class="pair reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/High-End-Lautsprecher.jpg" alt="High End Lautsprecher" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Audio</p>
-      <h3>High-End Lautsprecher</h3>
-      <p>Massivholzgehäuse für audiophile Ansprüche – wo Klangtechnik auf Handwerkskunst trifft.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
+<div class="pair reveal">
+  <div class="pair-img"><img src="https://hartholz.at/storage/Sidrboard-mit-Katzenhoehle.jpg" alt="Sideboard mit Katzenhöhle" loading="lazy"></div>
+  <div class="pair-text">
+    <p class="pair-label">Beständigkeit</p>
+    <h3>Stücke voller Seele und Beständigkeit</h3>
+    <p>Jedes Zuhause erzählt eine eigene Geschichte und jedes unserer Werke wird ein Teil davon. Im Zentrum steht dabei unsere meisterhafte Verarbeitung, gepaart mit der Auswahl hochwertigster Materialien. Unsere Werke sind nicht nur ästhetisch, sondern auch beständig und wertvoll – geschaffen, um Generationen zu erfreuen.</p>
   </div>
-
-  <div class="pair rev reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Sidrboard-mit-Katzenhoehle.jpg" alt="Sideboard mit Katzenhöhle" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Einzigartig</p>
-      <h3>Sideboard mit Katzenhöhle</h3>
-      <p>Möbel, die zum Leben passen – dieses Sideboard vereint stilvolles Design mit einem integrierten Rückzugsort für Ihre Katze.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
-  </div>
-
-  <div class="pair reveal">
-    <div class="pair-img">
-      <img src="https://hartholz.at/storage/Esstisch-2.jpg" alt="Esstisch" loading="lazy">
-    </div>
-    <div class="pair-text">
-      <p class="section-label">Tisch</p>
-      <h3>Besonderer Esstisch</h3>
-      <p>Ein Esstisch als Statement – ausgefallene Formen, edle Materialien, unvergessliches Design.</p>
-      <a href="kontakt.html" class="btn btn-dark">Anfragen</a>
-    </div>
-  </div>
-
 </div>
 
 <div class="cta-strip">
@@ -191,7 +174,7 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 HARTHOLZ Sascha Kraus</span>
-    <div style="display:flex; gap:1.5rem;">
+    <div style="display:flex;gap:1.5rem;">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
     </div>
