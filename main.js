@@ -1,12 +1,4 @@
-// ─── NAV SCROLL ───
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 10) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-}, { passive: true });
+// ─── NAV always white/beige ───
 
 // ─── HAMBURGER ───
 const hamburger = document.querySelector('.hamburger');
