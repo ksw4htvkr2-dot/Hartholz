@@ -224,7 +224,6 @@
     }
 
     @media (max-width: 560px) {
-      /* Hero: image shows full wood piece */
       .hero {
         min-height: 100svh;
         flex-direction: column;
@@ -235,10 +234,9 @@
         top: 0; left: 0; right: 0;
         height: 65%;
         clip-path: inset(0 0 0 0);
-        background-position: center 50%;
-        background-size: contain;
+        background-size: cover;
+        background-position: center 60%;
         background-repeat: no-repeat;
-        background-color: #1A1510;
       }
       .hero-banner {
         position: absolute;
@@ -262,7 +260,6 @@
       .hero-banner .hero-sub { font-size: 0.84rem; }
       .hero-banner .btn { margin-top: 0; margin-bottom: 0; align-self: flex-start; }
 
-      /* Gallery: hide grid, show slider */
       #dynGallery { display: none !important; }
       #mobileSlider { display: block !important; }
 
