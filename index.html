@@ -43,18 +43,19 @@
 
     .hero-overlay { display: none; }
 
-    /* Frosted banner – 55% Breite, dünner, transparenter */
+    /* Frosted banner – kompakter, von ganz rechts */
     .hero-banner {
       position: absolute;
       z-index: 2;
       bottom: -5%;
       right: 0;
-      width: 55%;
-      padding: 2.5vw 3.5vw 2.5vw 2.5vw;
+      width: 32%;
+      padding: 2vw 2.5vw 2vw 2.5vw;
       background: rgba(22, 14, 8, 0.20);
       backdrop-filter: blur(22px) saturate(1.2);
       -webkit-backdrop-filter: blur(20px) saturate(1.3);
       border: none;
+      border-radius: 16px 0 0 16px;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -223,7 +224,7 @@
     }
 
     @media (max-width: 560px) {
-      /* Hero: 65% image, 35% banner */
+      /* Hero: image shows full wood piece */
       .hero {
         min-height: 100svh;
         flex-direction: column;
@@ -234,6 +235,10 @@
         top: 0; left: 0; right: 0;
         height: 65%;
         clip-path: inset(0 0 0 0);
+        background-position: center 50%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: #1A1510;
       }
       .hero-banner {
         position: absolute;
@@ -241,7 +246,9 @@
         left: 0; right: 0;
         width: 100%;
         border: none;
-        padding: 1.25rem 6vw 1.5rem;
+        border-radius: 0;
+        --mob-pad: 6vw;
+        padding: var(--mob-pad);
         gap: 0.5rem;
         backdrop-filter: blur(24px) saturate(1.4);
         -webkit-backdrop-filter: blur(24px) saturate(1.4);
@@ -250,9 +257,10 @@
         flex-direction: column;
         justify-content: center;
       }
-      .hero-banner .hero-eyebrow { display: block; font-size: 0.62rem; }
+      .hero-banner .hero-eyebrow { display: none; }
       .hero-banner h1 { font-size: clamp(1.4rem, 6vw, 1.9rem); }
       .hero-banner .hero-sub { font-size: 0.84rem; }
+      .hero-banner .btn { margin-top: 0; margin-bottom: 0; align-self: flex-start; }
 
       /* Gallery: hide grid, show slider */
       #dynGallery { display: none !important; }
@@ -413,7 +421,6 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-banner">
-    <p class="hero-eyebrow">Tischlerei Hartholz · Markt Piesting</p>
     <h1>Möbel mit<br><em>Charakter</em></h1>
     <p class="hero-sub">Massivholz-Unikate, handgefertigt nach Ihren Wünschen – von der Skizze bis zur Montage.</p>
     <a href="wohnmoebel.html" class="btn btn-light">Arbeiten entdecken</a>
@@ -705,7 +712,7 @@
     });
   });
 
-  // ── SCROLL FADE: slow, smooth, high tolerance ──
+  // ── SCROLL FADE: bidirectional, works up and down ──
   const fadeEls = document.querySelectorAll('.si, .feat-card, .split-gap');
   let ticking = false;
 
@@ -715,11 +722,13 @@
       const rect = el.getBoundingClientRect();
       const center = rect.top + rect.height / 2;
       const distFromCenter = (center - vh / 2) / vh;
-      // tolerance: only fades after 65% from center
       const fadeDist = Math.max(0, Math.abs(distFromCenter) - 0.65);
-      const opacity = Math.max(0.38, 1 - fadeDist * 1.1);
+      const opacity = Math.max(0.3, 1 - fadeDist * 1.2);
+      const translateY = Math.min(12, fadeDist * 30);
+      const dir = distFromCenter > 0 ? 1 : -1;
       el.style.opacity = opacity;
-      el.style.transition = 'opacity 0.7s ease';
+      el.style.transform = `translateY(${dir * translateY}px)`;
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     });
     ticking = false;
   }
