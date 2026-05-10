@@ -226,7 +226,7 @@
     }
 
     @media (max-width: 560px) {
-      /* Hero: top half image, bottom half banner */
+      /* Hero: 65% image, 35% banner */
       .hero {
         min-height: 100svh;
         flex-direction: column;
@@ -235,15 +235,15 @@
       .hero-bg {
         position: absolute;
         top: 0; left: 0; right: 0;
-        height: 50%;
+        height: 65%;
         clip-path: inset(0 0 0 0);
       }
       .hero-banner {
         position: absolute;
-        top: 50%; bottom: 0;
+        top: 65%; bottom: 0;
         left: 0; right: 0;
         width: 100%;
-        border-top: 2px solid rgba(201,169,110,0.4);
+        border: none;
         padding: 1.25rem 6vw 1.5rem;
         gap: 0.5rem;
         backdrop-filter: blur(24px) saturate(1.4);
@@ -270,16 +270,21 @@
       display: none;
       position: relative;
       overflow: hidden;
-      margin: 0 0 0 0;
+      background: var(--dark);
     }
     .mobile-slider-track {
       display: flex;
       transition: transform 0.45s cubic-bezier(.25,.46,.45,.94);
+      will-change: transform;
+      background: var(--dark);
     }
     .mobile-slider-track .gi {
       flex: 0 0 100%;
+      width: 100%;
       aspect-ratio: 4/3;
       position: relative;
+      overflow: hidden;
+      background: var(--dark);
     }
     .mobile-slider-track .gi img {
       width: 100%; height: 100%;
