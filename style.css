@@ -204,7 +204,7 @@ body.nav-always-white .hamburger span { background: var(--dark); }
   inset: 0;
   background-image: url('https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center 30%;
   transform: scale(1.05);
   animation: heroZoom 12s ease forwards;
 }
