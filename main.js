@@ -1,13 +1,4 @@
-// ─── NAV SCROLL ───
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  // Turns white as soon as user scrolls away from absolute top
-  if (window.scrollY > 10) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-}, { passive: true });
+// ─── NAV always white – no scroll toggle needed ───
 
 // ─── HAMBURGER ───
 const hamburger = document.querySelector('.hamburger');
