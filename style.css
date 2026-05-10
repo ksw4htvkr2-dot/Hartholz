@@ -196,32 +196,21 @@ body.nav-always-white .hamburger span { background: var(--dark); }
   min-height: 600px;
   display: flex;
   align-items: flex-end;
-  overflow: hidden; /* Wichtig: Verhindert Ränder durch das Zooming */
-  margin: 0;        /* Sicherstellen, dass kein Außenabstand da ist */
-  padding: 0;       /* Sicherstellen, dass kein Innenabstand da ist */
+  overflow: hidden;
 }
 
 .hero-bg {
   position: absolute;
-  /* Benutze negative Werte oder 'inset: 0', um sicherzugehen, dass es über den Rand hinausragt */
-  top: -2px; 
-  left: -2px; 
-  right: -2px; 
-  bottom: -2px;
-  
+  inset: 0;
   background-image: url('https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg');
   background-size: cover;
-  background-position: center;
-  
-  /* Start-Status der Animation: Leicht vergrößert, damit beim Zoom kein Rand entsteht */
-  transform: scale(1.1); 
-  animation: heroZoom 10s ease-out forwards;
+  background-position: center 30%;
+  transform: scale(1.05);
+  animation: heroZoom 12s ease forwards;
 }
 
 @keyframes heroZoom {
-  /* Wir zoomen auf 1.0 (Normalgröße) zurück, 
-     aber die negativen Insets oben fangen eventuelle Blitzer ab */
-  to { transform: scale(1.0); }
+  to { transform: scale(1); }
 }
 
 .hero-overlay {
