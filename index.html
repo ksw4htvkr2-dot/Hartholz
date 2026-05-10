@@ -203,26 +203,38 @@
         position: absolute;
         bottom: 0; right: 0; left: 0;
         width: 100%;
-        border-left: none;
-        border-top: 1px solid rgba(201,169,110,0.3);
-        padding: 1.5rem 5vw 2rem;
+        border: none;
+        border-top: 1px solid rgba(201,169,110,0.25);
+        padding: 1.25rem 5vw 1.5rem;
+        gap: 0.4rem;
       }
+      .hero-banner h1 { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      .hero-banner .hero-sub { font-size: 0.85rem; }
       .dyn-gallery {
         grid-template-columns: 1fr 1fr;
         gap: 8px;
+        padding: 0 4vw;
       }
       .gi:nth-child(n) { grid-column: auto; grid-row: auto; min-height: 0; aspect-ratio: 4/3; }
       .gi:nth-child(1) { grid-column: 1/3; aspect-ratio: 16/9; }
-      .split-gap { grid-template-columns: 1fr; margin: 8px 5vw 0; }
-      .split-gap .si { min-height: 280px; position: relative; }
+      .split-gap { grid-template-columns: 1fr; margin: 8px 4vw 0; }
+      .split-gap .si { min-height: 260px; position: relative; }
       .split-gap .si img { position: absolute; }
       .split-gap.rev .sc { order: 0; }
-      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .split-gap .sc { padding: 2.5rem 1.75rem; }
+      .feat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     }
     @media (max-width: 560px) {
-      .dyn-gallery { grid-template-columns: 1fr; gap: 6px; }
+      .hero { min-height: 100svh; }
+      .hero-banner { padding: 1rem 5vw 1.25rem; }
+      .hero-banner h1 { font-size: clamp(1.15rem, 6vw, 1.5rem); }
+      .hero-banner .hero-eyebrow { display: none; }
+      .hero-banner .hero-sub { font-size: 0.82rem; }
+      .dyn-gallery { grid-template-columns: 1fr; gap: 6px; padding: 0 4vw; }
       .gi:nth-child(n) { grid-column: auto; aspect-ratio: 4/3; }
+      .gi:nth-child(1) { grid-column: auto; aspect-ratio: 4/3; }
       .feat-grid { grid-template-columns: 1fr; }
+      .split-gap .sc { padding: 2rem 1.5rem; }
     }
   </style>
 </head>
