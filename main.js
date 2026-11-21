@@ -4,7 +4,11 @@
 const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
 if (hamburger && mobileMenu) {
+  const mobileNavigation = window.matchMedia('(max-width: 900px)');
+  mobileMenu.inert = true;
+
   function setMenuOpen(isOpen) {
+    mobileMenu.inert = !isOpen;
     mobileMenu.classList.toggle('open', isOpen);
     hamburger.classList.toggle('open', isOpen);
     hamburger.setAttribute('aria-expanded', String(isOpen));
@@ -13,6 +17,9 @@ if (hamburger && mobileMenu) {
   }
 
   hamburger.addEventListener('click', () => setMenuOpen(!mobileMenu.classList.contains('open')));
+  mobileNavigation.addEventListener('change', event => {
+    if (!event.matches && mobileMenu.classList.contains('open')) setMenuOpen(false);
+  });
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => setMenuOpen(false));
   });

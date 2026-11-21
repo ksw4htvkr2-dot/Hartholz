@@ -35,10 +35,12 @@ function applyFade() {
   ticking = false;
 }
 
-window.addEventListener('scroll', () => {
-  if (!ticking) { requestAnimationFrame(applyFade); ticking = true; }
-}, { passive: true });
-applyFade();
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(applyFade); ticking = true; }
+  }, { passive: true });
+  applyFade();
+}
 
 (function() {
   const tabRow = document.querySelector('.saw-track');
@@ -139,7 +141,7 @@ applyFade();
   function goTo(idx) {
     current = (idx + slides.length) % slides.length;
     track.style.transform = `translateX(-${current * 100}%)`;
-    slides.forEach((slide, i) => { slide.tabIndex = i === current ? 0 : -1; });
+    slides.forEach((slide, i) => { slide.inert = i !== current; });
     dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
       dot.classList.toggle('active', i === current);
       dot.setAttribute('aria-current', i === current ? 'true' : 'false');
@@ -151,12 +153,21 @@ applyFade();
   document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
 
   // Touch swipe
-  let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  let swipeStart;
+  track.addEventListener('touchstart', event => {
+    swipeStart = event.touches.length === 1 ? event.touches[0] : undefined;
   }, { passive: true });
+  track.addEventListener('touchend', event => {
+    if (!swipeStart || event.touches.length) return;
+    const end = event.changedTouches[0];
+    const horizontal = swipeStart.clientX - end.clientX;
+    const vertical = swipeStart.clientY - end.clientY;
+    swipeStart = undefined;
+    if (Math.abs(horizontal) > 40 && Math.abs(horizontal) > Math.abs(vertical)) {
+      goTo(horizontal > 0 ? current + 1 : current - 1);
+    }
+  }, { passive: true });
+  track.addEventListener('touchcancel', () => { swipeStart = undefined; }, { passive: true });
 })();
 
 // ── COOKIE BAR ──
