@@ -65,3 +65,36 @@ if (tabs.length) {
     });
   });
 }
+
+// ─── GOOGLE MAPS ───
+const contactMapToggle = document.getElementById('contactMapToggle');
+if (contactMapToggle) {
+  const mapContainer = document.getElementById('contactMapFrame');
+
+  function deactivateMap() {
+    mapContainer.replaceChildren();
+    mapContainer.hidden = true;
+    contactMapToggle.textContent = 'Google Maps laden';
+    contactMapToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  contactMapToggle.addEventListener('click', () => {
+    if (!mapContainer.hidden) {
+      deactivateMap();
+      return;
+    }
+
+    const frame = document.createElement('iframe');
+    frame.title = 'Google Maps – Standort der HARTHOLZ Tischlerei';
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.allowFullscreen = true;
+    frame.src = mapContainer.dataset.mapSrc;
+    mapContainer.append(frame);
+    mapContainer.hidden = false;
+    contactMapToggle.textContent = 'Google Maps deaktivieren';
+    contactMapToggle.setAttribute('aria-expanded', 'true');
+  });
+  contactMapToggle.hidden = false;
+
+  window.addEventListener('pagehide', deactivateMap);
+}
