@@ -41,8 +41,13 @@ export async function POST(request) {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  const { RESEND_API_KEY, CONTACT_FROM_EMAIL } = process.env;
-  if (!RESEND_API_KEY || !CONTACT_FROM_EMAIL) {
+  const { RESEND_API_KEY, CONTACT_FROM_EMAIL, CONTACT_TEST_TO_EMAIL, VERCEL_ENV } = process.env;
+  const isPreview = VERCEL_ENV === 'preview';
+  const isProduction = VERCEL_ENV === 'production';
+  const from = isPreview ? 'onboarding@resend.dev' : CONTACT_FROM_EMAIL;
+  const recipient = isProduction ? 'office@hartholz.at' : CONTACT_TEST_TO_EMAIL?.trim();
+  if ((!isPreview && !isProduction) || !RESEND_API_KEY || !from ||
+      !recipient || !emailPattern.test(recipient)) {
     return Response.json({ ok: false }, { status: 503 });
   }
 
@@ -55,8 +60,8 @@ export async function POST(request) {
         'Idempotency-Key': `hartholz-contact/${submissionId}`,
       },
       body: JSON.stringify({
-        from: CONTACT_FROM_EMAIL,
-        to: ['office@hartholz.at'],
+        from,
+        to: [recipient],
         reply_to: email,
         subject: 'Website-Anfrage | Hartholz',
         text: [
