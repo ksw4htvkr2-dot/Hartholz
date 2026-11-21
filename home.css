@@ -181,7 +181,7 @@
 .feat-card p { font-size: 0.86rem; color: var(--text-light); line-height: 1.7; }
 
 /* ── MOBILE ── */
-/* Keep the full photograph visible on phones and portrait tablets. */
+/* A slightly taller crop keeps the entire wooden sign in view. */
 @media (max-width: 900px), (max-aspect-ratio: 4/3) {
   .hero {
     display: grid;
@@ -199,18 +199,22 @@
     transform: none;
     will-change: auto;
     clip-path: none;
+    aspect-ratio: 7 / 5;
   }
   .hero-bg img {
-    height: auto;
-    object-fit: contain;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    object-position: center;
   }
   .hero-banner {
     position: relative;
     inset: auto;
-    width: 100%;
+    width: 66.6667%;
+    justify-self: center;
     border: 0;
-    border-radius: 16px 16px 0 0;
-    padding: 1.25rem 6vw max(1.5rem, env(safe-area-inset-bottom));
+    border-radius: 0;
+    padding: 1.25rem clamp(0.75rem, 3vw, 2rem) max(1.5rem, env(safe-area-inset-bottom));
     justify-content: center;
     background: #443a33;
     backdrop-filter: none;
@@ -238,7 +242,13 @@
 }
 
 @media (max-width: 560px) {
-  .hero-banner .btn { margin: 0.35rem 0 0; min-height: 44px; }
+  .hero-banner .btn {
+    margin: 0.35rem 0 0;
+    min-height: 44px;
+    max-width: 100%;
+    padding-inline: 0.65rem;
+    text-align: center;
+  }
 
   #dynGallery { display: none !important; }
   #mobileSlider { display: block !important; }
@@ -253,7 +263,7 @@
     grid-template-rows: auto;
   }
   .hero-bg { align-self: center; }
-  .hero-banner { border-radius: 16px 0 0 16px; padding: 1rem 3vw; }
+  .hero-banner { width: 100%; padding: 1rem 3vw; }
 }
 
 @media (hover: none) {
