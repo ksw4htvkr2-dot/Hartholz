@@ -48,6 +48,12 @@ export async function POST(request) {
   const recipient = isProduction ? 'office@hartholz.at' : CONTACT_TEST_TO_EMAIL?.trim();
   if ((!isPreview && !isProduction) || !RESEND_API_KEY || !from ||
       !recipient || !emailPattern.test(recipient)) {
+    console.error('Contact email configuration is incomplete:', {
+      recognizedEnvironment: isPreview || isProduction,
+      hasApiKey: Boolean(RESEND_API_KEY),
+      hasSender: Boolean(from),
+      hasValidRecipient: Boolean(recipient && emailPattern.test(recipient)),
+    });
     return Response.json({ ok: false }, { status: 503 });
   }
 
