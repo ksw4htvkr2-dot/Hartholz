@@ -562,7 +562,8 @@ footer {
   max-width: 280px;
 }
 
-.footer-col h4 {
+.footer-col h4,
+.footer-col .footer-title {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.25em;
