@@ -24,381 +24,12 @@
   <meta name="twitter:image:alt" content="Sascha Kraus, Inhaber und Tischlermeister">
   <link rel="preload" as="image" href="https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      height: 100svh;
-      min-height: 620px;
-      overflow: visible;
-      display: flex;
-      align-items: center;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg');
-      background-size: cover;
-      background-position: center 40%;
-      will-change: transform;
-      clip-path: inset(0);
-    }
-
-    .hero-overlay { display: none; }
-
-    /* Frosted banner – kompakter, von ganz rechts */
-    .hero-banner {
-      position: absolute;
-      z-index: 2;
-      bottom: -5%;
-      right: 0;
-      width: 32%;
-      padding: 2vw 2.5vw 2vw 2.5vw;
-      background: rgba(22, 14, 8, 0.20);
-      backdrop-filter: blur(22px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.3);
-      border: none;
-      border-radius: 16px 0 0 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      animation: bannerIn 1s 0.4s cubic-bezier(.22,1,.36,1) both;
-    }
-    @keyframes bannerIn {
-      from { opacity: 0; transform: translateX(32px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-    .hero-banner .hero-eyebrow {
-      font-size: 0.67rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .hero-banner h1 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-      font-weight: 600;
-      color: #fff;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin: 0;
-    }
-    .hero-banner h1 em {
-      font-style: normal;
-      font-weight: 400;
-      color: var(--light-gold);
-    }
-    .hero-banner .hero-sub {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-    .hero-banner .btn { align-self: flex-start; margin-top: 0.3rem; }
-
-    /* ── DYNAMIC GALLERY ── */
-    .dyn-gallery {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 10px;
-      padding: 0 5vw;
-    }
-    .gi {
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-    }
-    .gi img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
-    }
-    .gi:hover img,
-    .gi:focus-visible img { transform: scale(1.05); }
-
-    .gi:nth-child(1) { grid-column: 1/8; grid-row: 1/3; min-height: 400px; }
-    .gi:nth-child(2) { grid-column: 8/13; aspect-ratio: 4/3; }
-    .gi:nth-child(3) { grid-column: 8/13; aspect-ratio: 4/3; }
-    .gi:nth-child(4) { grid-column: 1/5;  aspect-ratio: 4/3; }
-    .gi:nth-child(5) { grid-column: 5/9;  aspect-ratio: 4/3; }
-    .gi:nth-child(6) { grid-column: 9/13; aspect-ratio: 4/3; }
-
-    .gi-label {
-      position: absolute;
-      bottom: 0.75rem;
-      left: 0.9rem;
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(20,13,6,0.52);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 0.28rem 0.7rem;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: opacity 0.28s, transform 0.28s;
-    }
-    .gi:hover .gi-label,
-    .gi:focus-visible .gi-label { opacity: 1; transform: none; }
-
-    /* ── SPLIT mit Lücke ── */
-    .split-gap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 10px 5vw 0;
-    }
-    .split-gap .si {
-      overflow: hidden;
-      position: relative;
-      min-height: 460px;
-    }
-    .split-gap .si img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: filter 0.4s ease, transform 0.4s ease;
-      transform: scale(1.05);
-    }
-    /* hover handled by JS parallax */
-    .split-gap .sc {
-      padding: 4rem 3.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--cream);
-    }
-    .split-gap.rev { }
-    .split-gap.rev .sc { background: var(--warm-white); order: -1; }
-
-    /* ── FEATURE CARDS ── */
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 10px;
-      margin-top: 3rem;
-    }
-    .feat-card {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      padding: 2.25rem 1.75rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .feat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(61,43,31,0.1);
-    }
-    .feat-card .feature-icon { margin-bottom: 1.25rem; }
-    .feat-card h3 {
-      font-size: 0.97rem;
-      font-weight: 500;
-      color: var(--dark);
-      margin-bottom: 0.55rem;
-      letter-spacing: -0.01em;
-    }
-    .feat-card p { font-size: 0.86rem; color: var(--text-light); line-height: 1.7; }
-
-    /* ── MOBILE ── */
-    @media (max-width: 900px) {
-      .hero-banner {
-        position: absolute;
-        bottom: 0; right: 0; left: 0;
-        width: 100%;
-        border: none;
-        border-top: 1px solid rgba(201,169,110,0.25);
-        padding: 1.25rem 5vw 1.5rem;
-        gap: 0.4rem;
-      }
-      .hero-banner h1 { font-size: clamp(1.3rem, 5vw, 1.8rem); }
-      .hero-banner .hero-sub { font-size: 0.85rem; }
-      .dyn-gallery {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        padding: 0 4vw;
-      }
-      .gi:nth-child(n) { grid-column: auto; grid-row: auto; min-height: 0; aspect-ratio: 4/3; }
-      .gi:nth-child(1) { grid-column: 1/3; aspect-ratio: 16/9; }
-      .split-gap { grid-template-columns: 1fr; margin: 8px 4vw 0; }
-      .split-gap .si { min-height: 260px; position: relative; }
-      .split-gap .si img { position: absolute; }
-      .split-gap.rev .sc { order: 0; }
-      .split-gap .sc { padding: 2.5rem 1.75rem; }
-      .feat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    }
-
-    @media (max-width: 560px) {
-      .hero {
-        min-height: 100svh;
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .hero-bg {
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 65%;
-        clip-path: inset(0 0 0 0);
-        background-size: cover;
-        background-position: center 60%;
-        background-repeat: no-repeat;
-      }
-      .hero-banner {
-        position: absolute;
-        top: 65%; bottom: 0;
-        left: 0; right: 0;
-        width: 100%;
-        border: none;
-        border-radius: 0;
-        --mob-pad: 6vw;
-        padding: var(--mob-pad);
-        gap: 0.5rem;
-        backdrop-filter: blur(24px) saturate(1.4);
-        -webkit-backdrop-filter: blur(24px) saturate(1.4);
-        background: rgba(22,14,8,0.55);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .hero-banner .hero-eyebrow { display: none; }
-      .hero-banner h1 { font-size: clamp(1.4rem, 6vw, 1.9rem); }
-      .hero-banner .hero-sub { font-size: 0.84rem; }
-      .hero-banner .btn { margin-top: 0; margin-bottom: 0; align-self: flex-start; }
-
-      #dynGallery { display: none !important; }
-      #mobileSlider { display: block !important; }
-
-      .feat-grid { grid-template-columns: 1fr; }
-      .split-gap .sc { padding: 2rem 1.5rem; }
-    }
-
-    /* ── MOBILE GALLERY SLIDER ── */
-    .mobile-slider {
-      display: none;
-      position: relative;
-      overflow: hidden;
-      background: var(--dark);
-    }
-    .mobile-slider-track {
-      display: flex;
-      transition: transform 0.45s cubic-bezier(.25,.46,.45,.94);
-      will-change: transform;
-      background: var(--dark);
-    }
-    .mobile-slider-track .gi {
-      flex: 0 0 100%;
-      width: 100%;
-      aspect-ratio: 4/3;
-      position: relative;
-      overflow: hidden;
-      background: var(--dark);
-    }
-    .mobile-slider-track .gi img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .slider-btn {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      z-index: 10;
-      background: rgba(22,14,8,0.45);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(201,169,110,0.35);
-      color: #fff;
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background 0.2s;
-    }
-    .slider-btn:hover { background: rgba(201,169,110,0.5); }
-    .slider-btn.prev { left: 10px; }
-    .slider-btn.next { right: 10px; }
-    .slider-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      padding: 0.75rem 0 0;
-    }
-    .slider-dot {
-      border: 0;
-      padding: 0;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      transition: background 0.2s, transform 0.2s;
-      cursor: pointer;
-    }
-    .slider-dot.active {
-      background: var(--gold);
-      transform: scale(1.3);
-    }
-
-    /* ── COOKIE POPUP ── */
-    #cookieBar {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 9999;
-      background: rgba(26,18,10,0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(201,169,110,0.3);
-      padding: 1.25rem 5vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      transform: translateY(100%);
-      transition: transform 0.5s cubic-bezier(.22,1,.36,1);
-    }
-    #cookieBar.visible { transform: translateY(0); }
-    #cookieBar p {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.84rem;
-      line-height: 1.6;
-      margin: 0;
-      flex: 1;
-      min-width: 200px;
-    }
-    #cookieBar a { color: var(--gold); text-decoration: none; }
-    #cookieBar a:hover { text-decoration: underline; }
-    .cookie-btns { display: flex; gap: 0.75rem; flex-shrink: 0; }
-    .cookie-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.65rem 1.5rem;
-      border: 1px solid;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .cookie-btn-accept {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--dark);
-    }
-    .cookie-btn-accept:hover { background: var(--light-gold); border-color: var(--light-gold); }
-    .cookie-btn-decline {
-      background: transparent;
-      border-color: rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.6);
-    }
-    .cookie-btn-decline:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
-
-    @media (max-width: 560px) {
-      #cookieBar { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .cookie-btns { width: 100%; }
-      .cookie-btn { flex: 1; text-align: center; }
-    }
-  </style>
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
 <!-- NAV -->
+<header>
 <nav aria-label="Hauptnavigation">
   <a href="/">
     <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo" width="842" height="231">
@@ -420,13 +51,14 @@
   <a href="aussergewoehnliches.html">Außergewöhnliches</a>
   <a href="kontakt.html">Kontakt</a>
 </div>
+</header>
 
 <main>
 <!-- HERO: Vollbild + Frosted-Glass Banner rechts -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-banner">
-    <h1>Möbel nach<br><em>Maß</em></h1>
+    <h1>Möbel nach <br><em>Maß</em></h1>
     <p class="hero-sub">Ihre Tischlerei in Markt Piesting für individuelle Massivholzmöbel – von der Skizze bis zur Montage.</p>
     <a href="wohnmoebel.html" class="btn btn-light">Wohnmöbel entdecken</a>
   </div>
@@ -436,19 +68,20 @@
 <section>
   <div class="reveal">
     <p class="section-label">Über uns</p>
-    <h2 class="section-title">Tischlerei in<br><em>Markt Piesting</em></h2>
+    <h2 class="section-title">Tischlerei in <br><em>Markt Piesting</em></h2>
     <div class="divider"></div>
     <p class="section-body">
-      HARTHOLZ plant, fertigt und montiert Küchen, Wohnmöbel, Gartenmöbel und Sonderanfertigungen nach Maß. Wir arbeiten in Markt Piesting für Kundinnen und Kunden in Wien, Niederösterreich und im Burgenland.
+      HARTHOLZ plant, fertigt und montiert Küchen, Wohnmöbel, Gartenmöbel und Sonderanfertigungen nach Maß. Sascha Kraus ist Inhaber und Tischlermeister in Markt Piesting. Wir setzen Projekte in Wien, Niederösterreich und im Burgenland um.
     </p>
+    <p class="section-body home-business-profile"><a href="https://firmen.wko.at/sascha-alfred-kraus/nieder%C3%B6sterreich/?firmaid=fdd7f396-caa6-4fb8-946f-e6bdf1eb1dde">Tischlerei-Eintrag im WKO Firmen A–Z</a></p>
   </div>
 </section>
 
 <!-- FEATURES -->
-<section class="features" style="padding-bottom: 5rem;">
+<section class="features home-features">
   <div class="reveal">
     <p class="section-label">Was uns auszeichnet</p>
-    <h2 class="section-title">Perfektion bis ins<br><em>letzte Detail</em></h2>
+    <h2 class="section-title">Perfektion bis ins <br><em>letzte Detail</em></h2>
   </div>
   <div class="feat-grid">
     <div class="feat-card reveal">
@@ -504,10 +137,10 @@
 </section>
 
 <!-- GALLERY -->
-<section class="gallery-section" style="padding-bottom: 0;">
-  <div style="padding: 0 5vw;" class="reveal">
+<section class="gallery-section home-gallery">
+  <div class="home-gallery-heading reveal">
     <p class="section-label">Unsere Arbeiten</p>
-    <h2 class="section-title" style="color: var(--cream);">Möbel und Küchen<br><em style="color: var(--gold); font-style:normal; font-weight:400;">aus unserer Werkstatt</em></h2>
+    <h2 class="section-title home-gallery-title">Möbel und Küchen <br><em class="home-gallery-accent">aus unserer Werkstatt</em></h2>
   </div>
 
   <div class="dyn-gallery" id="dynGallery">
@@ -552,7 +185,7 @@
     <div class="slider-dots" id="sliderDots"></div>
   </div>
 
-  <div style="height: 4rem;"></div>
+  <div class="home-gallery-spacer"></div>
 </section>
 
 <!-- COOKIE BAR -->
@@ -571,7 +204,7 @@
   </div>
   <div class="sc">
     <p class="section-label">Unser Anspruch</p>
-    <h2 class="section-title">Mehr als ein<br><em>Tischler</em></h2>
+    <h2 class="section-title">Mehr als ein <br><em>Tischler</em></h2>
     <div class="divider"></div>
     <p class="section-body">
       Wir kooperieren mit Schlossern, Glasermeistern und Metallbearbeitern, 
@@ -584,13 +217,13 @@
 </div>
 
 <!-- SPLIT 2 -->
-<div class="split-gap rev reveal" style="margin-bottom: 0;">
+<div class="split-gap rev reveal home-last-split">
   <div class="si">
     <img src="https://hartholz.at/storage/Kueche-Dunkel-11.jpg" alt="Detail einer dunklen Maßküche" loading="lazy" width="800" height="1200" decoding="async">
   </div>
   <div class="sc">
     <p class="section-label">Wohnmöbel</p>
-    <h2 class="section-title">Vom Holz<br><em>zum Kunstwerk</em></h2>
+    <h2 class="section-title">Vom Holz <br><em>zum Kunstwerk</em></h2>
     <div class="divider"></div>
     <p class="section-body">
       Von stilvollen Massivholztischen bis zu maßgefertigten Küchen – 
@@ -601,9 +234,26 @@
   </div>
 </div>
 
+<section class="home-project-guide" aria-labelledby="projektplanung">
+  <h2 class="section-title" id="projektplanung">Fragen zur Projektplanung</h2>
+  <div class="divider"></div>
+  <article>
+    <h3>Wie beginnt die Planung einer Maßküche?</h3>
+    <p class="section-body">Für das erste Gespräch hilft ein Grundriss. Wenn Sie keinen haben, reichen ungefähre Maße und Fotos. Teilen Sie uns mit, welche Geräte Sie nutzen möchten und wo Ihnen Stauraum fehlt. Einen Einblick geben unsere <a href="wohnmoebel.html#masskuechen">Beispiele für Küchen nach Maß</a>.</p>
+  </article>
+  <article>
+    <h3>Was ist bei einer Sitzgruppe im Garten wichtig?</h3>
+    <p class="section-body">Überlegen Sie, wie viele Personen Platz finden sollen und ob die Sitzgruppe frei oder überdacht steht. Diese Angaben helfen bei der Wahl von Größe und Holzart. In der Galerie sehen Sie <a href="gartenmoebel.html#essplatz">Essplätze aus Eiche und Bangkirai</a>.</p>
+  </article>
+  <article>
+    <h3>Welche Angaben helfen bei einer Sonderanfertigung?</h3>
+    <p class="section-body">Beschreiben Sie, wofür Sie das Möbel brauchen, wo es steht und wie viel Platz verfügbar ist. Auch eine Skizze oder ein Foto hilft. Beispiele finden Sie bei den <a href="aussergewoehnliches.html">Sonderanfertigungen aus der Werkstatt</a>.</p>
+  </article>
+</section>
+
 <!-- CTA -->
-<div class="cta-strip" style="margin-top: 10px;">
-  <h2>Bereit für Ihren<br><em>Wohntraum?</em></h2>
+<div class="cta-strip home-contact-cta">
+  <h2>Bereit für Ihren <br><em>Wohntraum?</em></h2>
   <a href="kontakt.html" class="btn btn-light">Jetzt Kontakt aufnehmen</a>
 </div>
 
@@ -617,7 +267,7 @@
       <p>Exklusive Massivholzmöbel, handgefertigt in Markt Piesting.<br>Für Wien, NÖ und das Burgenland.</p>
     </div>
     <div class="footer-col">
-      <h4>Navigation</h4>
+      <h2 class="footer-title">Navigation</h2>
       <ul>
         <li><a href="wohnmoebel.html">Wohnmöbel</a></li>
         <li><a href="gartenmoebel.html">Gartenmöbel</a></li>
@@ -626,7 +276,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Kontakt</h4>
+      <h2 class="footer-title">Kontakt</h2>
       <address>
         Ing. Hans Wustingerstraße 9<br>
         2753 Markt Piesting<br><br>
@@ -637,14 +287,15 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 HARTHOLZ Sascha Kraus</span>
-    <div style="display:flex; gap: 1.5rem;">
+    <div class="home-footer-links">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
     </div>
   </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="main.js" defer></script>
+<script src="home.js" defer></script>
 <!-- Structured Data: LocalBusiness -->
 <script type="application/ld+json">
 {
@@ -665,6 +316,9 @@
     "addressCountry": "AT",
     "addressRegion": "Niederösterreich"
   },
+  "sameAs": [
+    "https://firmen.wko.at/sascha-alfred-kraus/nieder%C3%B6sterreich/?firmaid=fdd7f396-caa6-4fb8-946f-e6bdf1eb1dde"
+  ],
   "areaServed": [
     "Wien",
     "Niederösterreich",
@@ -710,212 +364,7 @@
   }
 }
 </script>
-<script>
-  // ── GALLERY TAB FILTER ──
-  document.querySelectorAll('.gallery-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const cat = tab.dataset.cat;
-      document.querySelectorAll('#dynGallery .gi').forEach(item => {
-        const show = cat === 'all' || item.dataset.cat === cat;
-        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-        item.style.opacity = show ? '1' : '0.15';
-        item.style.transform = show ? 'scale(1)' : 'scale(0.97)';
-        item.style.pointerEvents = show ? '' : 'none';
-      });
-    });
-  });
 
-  // ── SCROLL FADE: bidirectional, works up and down ──
-  const fadeEls = document.querySelectorAll('.si, .feat-card, .split-gap');
-  let ticking = false;
 
-  function applyFade() {
-    const vh = window.innerHeight;
-    fadeEls.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      const center = rect.top + rect.height / 2;
-      const distFromCenter = (center - vh / 2) / vh;
-      const fadeDist = Math.max(0, Math.abs(distFromCenter) - 0.65);
-      const opacity = Math.max(0.3, 1 - fadeDist * 1.2);
-      const translateY = Math.min(12, fadeDist * 30);
-      const dir = distFromCenter > 0 ? 1 : -1;
-      el.style.opacity = opacity;
-      el.style.transform = `translateY(${dir * translateY}px)`;
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(applyFade); ticking = true; }
-  }, { passive: true });
-  applyFade();
-</script>
-
-<!-- Circular Saw Tab Animation -->
-<style>
-  .saw-track { position: relative; }
-  .saw-indicator {
-    position: absolute;
-    bottom: -1px;
-    height: 2px;
-    background: var(--gold);
-    pointer-events: none;
-  }
-  .saw-blade-svg {
-    position: absolute;
-    bottom: -11px;
-    width: 22px;
-    height: 22px;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: 10;
-    overflow: visible;
-  }
-  .gallery-tab.active { color: #fff !important; }
-</style>
-
-<script>
-  (function() {
-    const tabRow = document.querySelector('.saw-track');
-    if (!tabRow) return;
-    const tabs = tabRow.querySelectorAll('.gallery-tab');
-    if (!tabs.length) return;
-
-    const indicator = document.createElement('div');
-    indicator.className = 'saw-indicator';
-    tabRow.appendChild(indicator);
-
-    const NS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('class', 'saw-blade-svg');
-    svg.setAttribute('viewBox', '0 0 22 22');
-
-    const g = document.createElementNS(NS, 'g');
-    g.innerHTML = `
-      <circle cx="11" cy="11" r="8.5" fill="none" stroke="#C9A96E" stroke-width="1.5"/>
-      <circle cx="11" cy="11" r="3.8" fill="#C9A96E"/>
-      <polygon points="11,1 12.6,4 11,3.2 9.4,4" fill="#C9A96E"/>
-      <polygon points="21,11 18,12.6 18.8,11 18,9.4" fill="#C9A96E"/>
-      <polygon points="11,21 9.4,18 11,18.8 12.6,18" fill="#C9A96E"/>
-      <polygon points="1,11 4,9.4 3.2,11 4,12.6" fill="#C9A96E"/>
-      <polygon points="18.56,3.44 15.5,6.5 16.4,5.2 15.1,5.9" fill="#C9A96E"/>
-      <polygon points="18.56,18.56 15.5,15.5 16.8,15.1 16.1,16.4" fill="#C9A96E"/>
-      <polygon points="3.44,18.56 6.5,15.5 5.9,16.8 5.2,16.1" fill="#C9A96E"/>
-      <polygon points="3.44,3.44 6.5,6.5 5.2,5.9 5.9,5.2" fill="#C9A96E"/>`;
-    svg.appendChild(g);
-    tabRow.appendChild(svg);
-
-    let animFrame, curLeft = 0, curWidth = 0, rotation = 0;
-
-    function setInstant(tab) {
-      const rr = tabRow.getBoundingClientRect();
-      const tr = tab.getBoundingClientRect();
-      curLeft = tr.left - rr.left;
-      curWidth = tr.width;
-      indicator.style.cssText = `left:${curLeft}px;width:${curWidth}px;transition:none`;
-      svg.style.left = (curLeft + curWidth / 2) + 'px';
-    }
-
-    function animateTo(tab) {
-      const rr = tabRow.getBoundingClientRect();
-      const tr = tab.getBoundingClientRect();
-      const toLeft = tr.left - rr.left;
-      const toWidth = tr.width;
-      const fromLeft = curLeft, fromWidth = curWidth;
-      const dist = Math.abs(toLeft - fromLeft);
-      const duration = 420 + dist * 0.4;
-      const start = performance.now();
-      cancelAnimationFrame(animFrame);
-
-      function step(now) {
-        const t = Math.min(1, (now - start) / duration);
-        const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-        const cl = fromLeft + (toLeft - fromLeft) * ease;
-        const cw = fromWidth + (toWidth - fromWidth) * ease;
-        indicator.style.left = cl + 'px';
-        indicator.style.width = cw + 'px';
-        indicator.style.transition = 'none';
-        svg.style.left = (cl + cw / 2) + 'px';
-        rotation += (dist / duration) * 16;
-        g.style.transform = `rotate(${rotation}deg)`;
-        g.style.transformOrigin = '11px 11px';
-        if (t < 1) { animFrame = requestAnimationFrame(step); }
-        else { curLeft = toLeft; curWidth = toWidth; }
-      }
-      animFrame = requestAnimationFrame(step);
-    }
-
-    setTimeout(() => {
-      setInstant(tabRow.querySelector('.gallery-tab.active') || tabs[0]);
-    }, 80);
-
-    tabs.forEach(tab => tab.addEventListener('click', () => animateTo(tab)));
-  })();
-</script>
-
-<script>
-// ── MOBILE GALLERY SLIDER ──
-(function() {
-  const track = document.getElementById('sliderTrack');
-  const dotsContainer = document.getElementById('sliderDots');
-  if (!track) return;
-
-  const slides = track.querySelectorAll('.gi');
-  let current = 0;
-
-  // Build dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.setAttribute('aria-label', `Projekt ${i + 1} anzeigen`);
-    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function goTo(idx) {
-    current = (idx + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    slides.forEach((slide, i) => { slide.tabIndex = i === current ? 0 : -1; });
-    dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === current);
-      dot.setAttribute('aria-current', i === current ? 'true' : 'false');
-    });
-  }
-
-  goTo(0);
-  document.getElementById('sliderPrev').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
-
-  // Touch swipe
-  let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-  }, { passive: true });
-})();
-
-// ── COOKIE BAR ──
-(function() {
-  const bar = document.getElementById('cookieBar');
-  if (!bar) return;
-  if (localStorage.getItem('cookieChoice')) return;
-
-  setTimeout(() => bar.classList.add('visible'), 1200);
-
-  document.getElementById('cookieAccept').addEventListener('click', () => {
-    localStorage.setItem('cookieChoice', 'accepted');
-    bar.style.transform = 'translateY(100%)';
-  });
-  document.getElementById('cookieDecline').addEventListener('click', () => {
-    localStorage.setItem('cookieChoice', 'declined');
-    bar.style.transform = 'translateY(100%)';
-  });
-})();
-</script>
 </body>
 </html>
