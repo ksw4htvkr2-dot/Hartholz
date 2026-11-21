@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-AT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hartholz – Exklusive Möbel-Tischlerei | Wien, NÖ & BGLD</title>
-  <meta name="description" content="HARTHOLZ steht für exklusive Möbel und individuelles Design, gefertigt mit Leidenschaft und meisterlicher Präzision.">
+  <title>Tischlerei für Möbel nach Maß | HARTHOLZ Markt Piesting</title>
+  <meta name="description" content="HARTHOLZ fertigt Maßküchen, Wohn- und Gartenmöbel sowie Sonderanfertigungen in Markt Piesting. Für Projekte in Wien, Niederösterreich und im Burgenland.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://hartholz.at/">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hartholz.at/">
-  <meta property="og:title" content="Hartholz – Exklusive Möbel-Tischlerei | Wien, NÖ & BGLD">
-  <meta property="og:description" content="HARTHOLZ steht für exklusive Möbel und individuelles Design, gefertigt mit Leidenschaft und meisterlicher Präzision.">
+  <meta property="og:title" content="Tischlerei für Möbel nach Maß | HARTHOLZ Markt Piesting">
+  <meta property="og:description" content="HARTHOLZ fertigt Maßküchen, Wohn- und Gartenmöbel sowie Sonderanfertigungen in Markt Piesting. Für Projekte in Wien, Niederösterreich und im Burgenland.">
   <meta property="og:image" content="https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg">
+  <meta property="og:image:alt" content="Sascha Kraus, Inhaber und Tischlermeister">
   <meta property="og:locale" content="de_AT">
   <meta property="og:site_name" content="HARTHOLZ Tischlerei">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hartholz – Exklusive Möbel-Tischlerei | Wien, NÖ & BGLD">
-  <meta name="twitter:description" content="HARTHOLZ steht für exklusive Möbel und individuelles Design, gefertigt mit Leidenschaft und meisterlicher Präzision.">
+  <meta name="twitter:title" content="Tischlerei für Möbel nach Maß | HARTHOLZ Markt Piesting">
+  <meta name="twitter:description" content="HARTHOLZ fertigt Maßküchen, Wohn- und Gartenmöbel sowie Sonderanfertigungen in Markt Piesting. Für Projekte in Wien, Niederösterreich und im Burgenland.">
   <meta name="twitter:image" content="https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg">
+  <meta name="twitter:image:alt" content="Sascha Kraus, Inhaber und Tischlermeister">
+  <link rel="preload" as="image" href="https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
   <style>
     /* ── HERO ── */
@@ -111,7 +114,8 @@
       display: block;
       transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
     }
-    .gi:hover img { transform: scale(1.05); }
+    .gi:hover img,
+    .gi:focus-visible img { transform: scale(1.05); }
 
     .gi:nth-child(1) { grid-column: 1/8; grid-row: 1/3; min-height: 400px; }
     .gi:nth-child(2) { grid-column: 8/13; aspect-ratio: 4/3; }
@@ -136,7 +140,8 @@
       transform: translateY(5px);
       transition: opacity 0.28s, transform 0.28s;
     }
-    .gi:hover .gi-label { opacity: 1; transform: none; }
+    .gi:hover .gi-label,
+    .gi:focus-visible .gi-label { opacity: 1; transform: none; }
 
     /* ── SPLIT mit Lücke ── */
     .split-gap {
@@ -317,6 +322,8 @@
       padding: 0.75rem 0 0;
     }
     .slider-dot {
+      border: 0;
+      padding: 0;
       width: 6px; height: 6px;
       border-radius: 50%;
       background: rgba(255,255,255,0.3);
@@ -392,9 +399,9 @@
 <body>
 
 <!-- NAV -->
-<nav>
-  <a href="index.html">
-    <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo">
+<nav aria-label="Hauptnavigation">
+  <a href="/">
+    <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" class="nav-logo" width="842" height="231">
   </a>
   <ul class="nav-links">
     <li><a href="wohnmoebel.html">Wohnmöbel</a></li>
@@ -402,25 +409,26 @@
     <li><a href="aussergewoehnliches.html">Außergewöhnliches</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
   </ul>
-  <button class="hamburger" aria-label="Menü öffnen">
+  <button type="button" class="hamburger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<div class="mobile-menu">
+<div class="mobile-menu" id="mobileMenu">
   <a href="wohnmoebel.html">Wohnmöbel</a>
   <a href="gartenmoebel.html">Gartenmöbel</a>
   <a href="aussergewoehnliches.html">Außergewöhnliches</a>
   <a href="kontakt.html">Kontakt</a>
 </div>
 
+<main>
 <!-- HERO: Vollbild + Frosted-Glass Banner rechts -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-banner">
-    <h1>Möbel mit<br><em>Charakter</em></h1>
-    <p class="hero-sub">Massivholz-Unikate, handgefertigt nach Ihren Wünschen – von der Skizze bis zur Montage.</p>
-    <a href="wohnmoebel.html" class="btn btn-light">Arbeiten entdecken</a>
+    <h1>Möbel nach<br><em>Maß</em></h1>
+    <p class="hero-sub">Ihre Tischlerei in Markt Piesting für individuelle Massivholzmöbel – von der Skizze bis zur Montage.</p>
+    <a href="wohnmoebel.html" class="btn btn-light">Wohnmöbel entdecken</a>
   </div>
 </section>
 
@@ -428,12 +436,10 @@
 <section>
   <div class="reveal">
     <p class="section-label">Über uns</p>
-    <h2 class="section-title">Handwerkskunst trifft<br><em>auf Natur</em></h2>
+    <h2 class="section-title">Tischlerei in<br><em>Markt Piesting</em></h2>
     <div class="divider"></div>
     <p class="section-body">
-      Bei HARTHOLZ entsteht kein Möbel von der Stange – jedes Stück ist ein Unikat, 
-      das die Wärme und Seele des Holzes in Ihr Zuhause bringt. Wir planen, fertigen 
-      und installieren Ihre Traummöbel mit höchster Präzision und fairen Preisen.
+      HARTHOLZ plant, fertigt und montiert Küchen, Wohnmöbel, Gartenmöbel und Sonderanfertigungen nach Maß. Wir arbeiten in Markt Piesting für Kundinnen und Kunden in Wien, Niederösterreich und im Burgenland.
     </p>
   </div>
 </section>
@@ -501,48 +507,48 @@
 <section class="gallery-section" style="padding-bottom: 0;">
   <div style="padding: 0 5vw;" class="reveal">
     <p class="section-label">Unsere Arbeiten</p>
-    <h2 class="section-title" style="color: var(--cream);">Erleben Sie die<br><em style="color: var(--gold); font-style:normal; font-weight:400;">Vielfalt</em></h2>
+    <h2 class="section-title" style="color: var(--cream);">Möbel und Küchen<br><em style="color: var(--gold); font-style:normal; font-weight:400;">aus unserer Werkstatt</em></h2>
   </div>
 
   <div class="dyn-gallery" id="dynGallery">
-    <div class="gi reveal" data-cat="garten">
-      <img src="https://hartholz.at/storage/Essplatz-Bangkirai.jpg" alt="Essplatz Bangkirai" loading="lazy">
+    <a class="gi reveal" data-cat="garten" href="gartenmoebel.html#essplatz" aria-label="Gartenmöbel ansehen">
+      <img src="https://hartholz.at/storage/Essplatz-Bangkirai.jpg" alt="Essplatz aus Bangkirai" loading="lazy" width="1066" height="800" decoding="async">
       <span class="gi-label">Gartenmöbel</span>
-    </div>
-    <div class="gi reveal" data-cat="aussen">
-      <img src="https://hartholz.at/storage/Wohnmoebel-7.jpg" alt="Sideboard" loading="lazy">
+    </a>
+    <a class="gi reveal" data-cat="aussen" href="wohnmoebel.html#wohnmoebel-projekte" aria-label="Sideboard ansehen">
+      <img src="https://hartholz.at/storage/Wohnmoebel-7.jpg" alt="Sideboard aus Holz" loading="lazy" width="1204" height="800" decoding="async">
       <span class="gi-label">Sideboard</span>
-    </div>
-    <div class="gi reveal" data-cat="wohn">
-      <img src="https://hartholz.at/storage/Kueche-Dunkel-7.jpg" alt="Küche" loading="lazy">
-      <span class="gi-label">Küche</span>
-    </div>
-    <div class="gi reveal" data-cat="wohn">
-      <img src="https://hartholz.at/storage/Esstisch.jpg" alt="Esstisch" loading="lazy">
+    </a>
+    <a class="gi reveal" data-cat="wohn" href="wohnmoebel.html#masskuechen" aria-label="Maßküche ansehen">
+      <img src="https://hartholz.at/storage/Kueche-Dunkel-7.jpg" alt="Dunkle Maßküche" loading="lazy" width="800" height="1200" decoding="async">
+      <span class="gi-label">Maßküche</span>
+    </a>
+    <a class="gi reveal" data-cat="wohn" href="wohnmoebel.html#wohnmoebel-projekte" aria-label="Esstisch ansehen">
+      <img src="https://hartholz.at/storage/Esstisch.jpg" alt="Esstisch aus Holz" loading="lazy" width="800" height="1067" decoding="async">
       <span class="gi-label">Esstisch</span>
-    </div>
-    <div class="gi reveal" data-cat="wohn">
-      <img src="https://hartholz.at/storage/Wohnmoebel-11.jpg" alt="Wohnwand" loading="lazy">
+    </a>
+    <a class="gi reveal" data-cat="wohn" href="wohnmoebel.html#wohnmoebel-projekte" aria-label="Wohnwand ansehen">
+      <img src="https://hartholz.at/storage/Wohnmoebel-11.jpg" alt="Wohnwand aus Holz" loading="lazy" width="800" height="1204" decoding="async">
       <span class="gi-label">Wohnwand</span>
-    </div>
-    <div class="gi reveal" data-cat="wohn">
-      <img src="https://hartholz.at/storage/Badezimmer.jpg" alt="Badezimmer" loading="lazy">
-      <span class="gi-label">Badezimmer</span>
-    </div>
+    </a>
+    <a class="gi reveal" data-cat="wohn" href="wohnmoebel.html#badmoebel" aria-label="Badmöbel ansehen">
+      <img src="https://hartholz.at/storage/Badezimmer.jpg" alt="Maßmöbel im Badezimmer" loading="lazy" width="640" height="960" decoding="async">
+      <span class="gi-label">Badmöbel</span>
+    </a>
   </div>
 
   <!-- Mobile Slider (only shown on small screens) -->
   <div class="mobile-slider" id="mobileSlider">
     <div class="mobile-slider-track" id="sliderTrack">
-      <div class="gi"><img src="https://hartholz.at/storage/Essplatz-Bangkirai.jpg" alt="Gartenmöbel"><span class="gi-label">Gartenmöbel</span></div>
-      <div class="gi"><img src="https://hartholz.at/storage/Wohnmoebel-7.jpg" alt="Sideboard"><span class="gi-label">Sideboard</span></div>
-      <div class="gi"><img src="https://hartholz.at/storage/Kueche-Dunkel-7.jpg" alt="Küche"><span class="gi-label">Küche</span></div>
-      <div class="gi"><img src="https://hartholz.at/storage/Esstisch.jpg" alt="Esstisch"><span class="gi-label">Esstisch</span></div>
-      <div class="gi"><img src="https://hartholz.at/storage/Wohnmoebel-11.jpg" alt="Wohnwand"><span class="gi-label">Wohnwand</span></div>
-      <div class="gi"><img src="https://hartholz.at/storage/Badezimmer.jpg" alt="Badezimmer"><span class="gi-label">Badezimmer</span></div>
+      <a class="gi" href="gartenmoebel.html#essplatz" aria-label="Gartenmöbel ansehen"><img src="https://hartholz.at/storage/Essplatz-Bangkirai.jpg" alt="Essplatz aus Bangkirai" loading="lazy" width="1066" height="800" decoding="async"><span class="gi-label">Gartenmöbel</span></a>
+      <a class="gi" href="wohnmoebel.html#wohnmoebel-projekte" aria-label="Sideboard ansehen"><img src="https://hartholz.at/storage/Wohnmoebel-7.jpg" alt="Sideboard aus Holz" loading="lazy" width="1204" height="800" decoding="async"><span class="gi-label">Sideboard</span></a>
+      <a class="gi" href="wohnmoebel.html#masskuechen" aria-label="Maßküche ansehen"><img src="https://hartholz.at/storage/Kueche-Dunkel-7.jpg" alt="Dunkle Maßküche" loading="lazy" width="800" height="1200" decoding="async"><span class="gi-label">Maßküche</span></a>
+      <a class="gi" href="wohnmoebel.html#wohnmoebel-projekte" aria-label="Esstisch ansehen"><img src="https://hartholz.at/storage/Esstisch.jpg" alt="Esstisch aus Holz" loading="lazy" width="800" height="1067" decoding="async"><span class="gi-label">Esstisch</span></a>
+      <a class="gi" href="wohnmoebel.html#wohnmoebel-projekte" aria-label="Wohnwand ansehen"><img src="https://hartholz.at/storage/Wohnmoebel-11.jpg" alt="Wohnwand aus Holz" loading="lazy" width="800" height="1204" decoding="async"><span class="gi-label">Wohnwand</span></a>
+      <a class="gi" href="wohnmoebel.html#badmoebel" aria-label="Badmöbel ansehen"><img src="https://hartholz.at/storage/Badezimmer.jpg" alt="Maßmöbel im Badezimmer" loading="lazy" width="640" height="960" decoding="async"><span class="gi-label">Badmöbel</span></a>
     </div>
-    <button class="slider-btn prev" id="sliderPrev">&#8592;</button>
-    <button class="slider-btn next" id="sliderNext">&#8594;</button>
+    <button type="button" class="slider-btn prev" id="sliderPrev" aria-label="Vorheriges Projekt">&#8592;</button>
+    <button type="button" class="slider-btn next" id="sliderNext" aria-label="Nächstes Projekt">&#8594;</button>
     <div class="slider-dots" id="sliderDots"></div>
   </div>
 
@@ -561,7 +567,7 @@
 <!-- SPLIT 1 -->
 <div class="split-gap reveal">
   <div class="si">
-    <img src="https://hartholz.at/storage/Kueche-Dunkel-2.jpg" alt="Küche Hartholz">
+    <img src="https://hartholz.at/storage/Kueche-Dunkel-2.jpg" alt="Dunkle Holzküche von HARTHOLZ" loading="lazy" width="1067" height="800" decoding="async">
   </div>
   <div class="sc">
     <p class="section-label">Unser Anspruch</p>
@@ -580,7 +586,7 @@
 <!-- SPLIT 2 -->
 <div class="split-gap rev reveal" style="margin-bottom: 0;">
   <div class="si">
-    <img src="https://hartholz.at/storage/Kueche-Dunkel-11.jpg" alt="Wohnmöbel Hartholz">
+    <img src="https://hartholz.at/storage/Kueche-Dunkel-11.jpg" alt="Detail einer dunklen Maßküche" loading="lazy" width="800" height="1200" decoding="async">
   </div>
   <div class="sc">
     <p class="section-label">Wohnmöbel</p>
@@ -601,11 +607,13 @@
   <a href="kontakt.html" class="btn btn-light">Jetzt Kontakt aufnehmen</a>
 </div>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo">
+      <img src="https://hartholz.at/storage/Logo-Hartholz.png" alt="Hartholz Logo" width="842" height="231" decoding="async">
       <p>Exklusive Massivholzmöbel, handgefertigt in Markt Piesting.<br>Für Wien, NÖ und das Burgenland.</p>
     </div>
     <div class="footer-col">
@@ -620,7 +628,7 @@
     <div class="footer-col">
       <h4>Kontakt</h4>
       <address>
-        Hans Wustingerstraße 9<br>
+        Ing. Hans Wustingerstraße 9<br>
         2753 Markt Piesting<br><br>
         <a href="tel:+4369910525544">0699 105 255 44</a><br>
         <a href="mailto:office@hartholz.at">office@hartholz.at</a>
@@ -643,15 +651,12 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "HARTHOLZ Tischlerei",
-  "description": "Exklusive Massivholzmöbel, maßgefertigt nach Ihren Wünschen – von der Skizze bis zur Montage.",
+  "description": "Tischlerei in Markt Piesting für Maßküchen, Wohnmöbel, Gartenmöbel und Sonderanfertigungen.",
   "url": "https://hartholz.at",
   "telephone": "+4369910525544",
   "email": "office@hartholz.at",
   "image": "https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg",
   "logo": "https://hartholz.at/storage/Logo-Hartholz.png",
-  "priceRange": "€€",
-  "currenciesAccepted": "EUR",
-  "paymentAccepted": "Überweisung, Barzahlung",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Ing. Hans Wustingerstraße 9",
@@ -660,34 +665,47 @@
     "addressCountry": "AT",
     "addressRegion": "Niederösterreich"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 47.8133,
-    "longitude": 15.9947
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "description": "Nach Vereinbarung"
-  },
-  "sameAs": [
-    "https://hartholz.at"
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": "Sascha Kraus",
-    "jobTitle": "Tischlermeister"
-  },
   "areaServed": [
-    "Wien", "Niederösterreich", "Burgenland"
+    "Wien",
+    "Niederösterreich",
+    "Burgenland"
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Tischlerarbeiten",
     "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wohnmöbel nach Maß" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gartenmöbel" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maßküchen" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sonderanfertigungen" } }
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Wohnmöbel nach Maß",
+          "url": "https://hartholz.at/wohnmoebel.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gartenmöbel",
+          "url": "https://hartholz.at/gartenmoebel.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Maßküchen",
+          "url": "https://hartholz.at/wohnmoebel.html#masskuechen"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Sonderanfertigungen",
+          "url": "https://hartholz.at/aussergewoehnliches.html"
+        }
+      }
     ]
   }
 }
@@ -850,7 +868,9 @@
 
   // Build dots
   slides.forEach((_, i) => {
-    const dot = document.createElement('div');
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Projekt ${i + 1} anzeigen`);
     dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
     dot.addEventListener('click', () => goTo(i));
     dotsContainer.appendChild(dot);
@@ -859,10 +879,14 @@
   function goTo(idx) {
     current = (idx + slides.length) % slides.length;
     track.style.transform = `translateX(-${current * 100}%)`;
-    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) =>
-      d.classList.toggle('active', i === current));
+    slides.forEach((slide, i) => { slide.tabIndex = i === current ? 0 : -1; });
+    dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+      dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+    });
   }
 
+  goTo(0);
   document.getElementById('sliderPrev').addEventListener('click', () => goTo(current - 1));
   document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
 
