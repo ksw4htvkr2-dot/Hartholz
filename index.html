@@ -57,7 +57,10 @@
 <main>
 <!-- HERO: Vollbild + Frosted-Glass Banner rechts -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <picture class="hero-bg">
+    <source media="(width > 900px)" srcset="https://hartholz.at/storage/Hartholz-Sascha-Kraus.jpg" width="1920" height="1280">
+    <img src="hartholz-hero-mobile.webp" width="960" height="640" alt="Hand mit einem Holzstück, in das der Schriftzug HARTHOLZ geschnitzt ist" fetchpriority="high">
+  </picture>
   <div class="hero-banner">
     <h1>Möbel nach <br><em>Maß</em></h1>
     <p class="hero-sub">Ihre Tischlerei in Markt Piesting für individuelle Massivholzmöbel – von der Skizze bis zur Montage.</p>
