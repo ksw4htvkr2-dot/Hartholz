@@ -110,7 +110,10 @@ body.nav-always-white .hamburger span { background: var(--dark); }
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 10px;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   z-index: 101;
@@ -145,13 +148,18 @@ body.nav-always-white .hamburger span { background: var(--dark); }
   overflow: hidden;
   opacity: 0;
   display: flex;
+  visibility: hidden;
   pointer-events: none;
   transition: max-height 0.45s cubic-bezier(.22,1,.36,1),
-              opacity 0.35s ease;
+              opacity 0.35s ease,
+              visibility 0.45s;
 }
 
 .mobile-menu.open {
-  max-height: 400px;
+  max-height: min(400px, calc(100dvh - var(--nav-h)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
@@ -854,7 +862,14 @@ main [id] {
 
   .footer-grid { grid-template-columns: 1fr 1fr; }
 
-  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+
+  .contact-page .form-group :is(input, textarea, select) { font-size: 1rem; }
+  .contact-page :is(.btn, .form-group select) { min-height: 44px; }
+  .contact-page :is(input, textarea, select, button):focus-visible {
+    outline: 2px solid var(--wood);
+    outline-offset: 2px;
+  }
 
   .cta-strip { flex-direction: column; gap: 1.5rem; padding: 3rem 5vw; }
   .cta-strip h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
@@ -916,4 +931,16 @@ main [id] {
   .product-grid { grid-template-columns: 1fr; }
 
   .features-grid { grid-template-columns: 1fr; }
+}
+
+@media (hover: none) {
+  .collage .ci { cursor: auto; }
+  .collage .ci-lbl { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .mobile-menu,
+  .mobile-menu a,
+  .hamburger span { transition: none; }
 }
