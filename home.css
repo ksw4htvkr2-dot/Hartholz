@@ -203,6 +203,8 @@
 
 @media (max-width: 560px) {
   .hero {
+    /* Limit the cover crop so both ends of the engraved name stay visible. */
+    --hero-photo-height: min(65%, 106vw);
     min-height: 100svh;
     flex-direction: column;
     align-items: stretch;
@@ -210,7 +212,7 @@
   .hero-bg {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 65%;
+    height: var(--hero-photo-height);
     clip-path: inset(0 0 0 0);
     background-size: cover;
     background-position: center 60%;
@@ -218,7 +220,7 @@
   }
   .hero-banner {
     position: absolute;
-    top: 65%; bottom: 0;
+    top: var(--hero-photo-height); bottom: 0;
     left: 0; right: 0;
     width: 100%;
     border: none;
