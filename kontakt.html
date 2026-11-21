@@ -23,8 +23,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .contact-page { padding-top: calc(var(--nav-h) + 4rem); }
-    .form-success {
-      display: none;
+    .form-status:not(:empty) {
       background: rgba(201, 169, 110, 0.12);
       border: 1px solid var(--gold);
       padding: 1.5rem 2rem;
@@ -119,24 +118,24 @@
 
       <!-- FORM -->
       <div class="reveal">
-        <div class="form-success" id="formSuccess">
-          ✓ Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns in Kürze.
-        </div>
-
-        <form id="contactForm" novalidate>
+        <form id="contactForm" action="/api/contact" method="post">
+          <div hidden>
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <div class="form-group">
             <label for="name">Name *</label>
-            <input type="text" id="name" name="name" placeholder="Max Mustermann" required>
+            <input type="text" id="name" name="name" maxlength="120" placeholder="Max Mustermann" required>
           </div>
 
           <div class="form-group">
             <label for="email">E-Mail *</label>
-            <input type="email" id="email" name="email" placeholder="max@beispiel.at" required>
+            <input type="email" id="email" name="email" maxlength="254" placeholder="max@beispiel.at" required>
           </div>
 
           <div class="form-group">
             <label for="phone">Telefon</label>
-            <input type="tel" id="phone" name="phone" placeholder="+43 ...">
+            <input type="tel" id="phone" name="phone" maxlength="40" placeholder="+43 ...">
           </div>
 
           <div class="form-group">
@@ -152,13 +151,15 @@
 
           <div class="form-group">
             <label for="message">Nachricht *</label>
-            <textarea id="message" name="message" placeholder="Beschreiben Sie Ihr Projekt oder Ihre Frage ..." required></textarea>
+            <textarea id="message" name="message" maxlength="5000" placeholder="Beschreiben Sie Ihr Projekt oder Ihre Frage ..." required></textarea>
           </div>
 
           <button type="submit" class="btn btn-dark" style="width: 100%; font-family: 'DM Sans', sans-serif; cursor: pointer;">
             Nachricht senden
           </button>
+          <p id="formStatus" class="form-status" role="status"></p>
         </form>
+        <noscript>Bitte senden Sie Ihre Anfrage per E-Mail an <a href="mailto:office@hartholz.at">office@hartholz.at</a>.</noscript>
       </div>
 
     </div>
@@ -201,19 +202,53 @@
 
 <script src="main.js"></script>
 <script>
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    if (!name || !email || !message) {
-      alert('Bitte füllen Sie alle Pflichtfelder aus.');
+  const contactForm = document.getElementById('contactForm');
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const formStatus = document.getElementById('formStatus');
+  let pendingSubmission;
+
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (submitButton.disabled) return;
+
+    const data = Object.fromEntries(
+      Array.from(new FormData(contactForm), ([key, value]) => [key, value.trim()])
+    );
+    if (!data.name || !data.email || !data.message) {
+      formStatus.textContent = 'Bitte füllen Sie Name, E-Mail und Nachricht aus.';
       return;
     }
-    // Show success (in production: send via fetch to backend)
-    document.getElementById('formSuccess').style.display = 'block';
-    this.reset();
-    window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+
+    submitButton.disabled = true;
+    formStatus.textContent = 'Ihre Nachricht wird gesendet …';
+    try {
+      const payload = JSON.stringify(data);
+      if (pendingSubmission?.payload !== payload) {
+        pendingSubmission = { payload, id: crypto.randomUUID() };
+      }
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, submissionId: pendingSubmission.id }),
+        signal: AbortSignal.timeout(15_000),
+      });
+
+      if (!response.ok || (await response.json()).ok !== true) {
+        throw new Error('Contact form submission failed');
+      }
+
+      // Keep any edits made while the request was in flight.
+      const current = Object.fromEntries(
+        Array.from(new FormData(contactForm), ([key, value]) => [key, value.trim()])
+      );
+      if (JSON.stringify(current) === payload) contactForm.reset();
+      pendingSubmission = undefined;
+      formStatus.textContent = 'Vielen Dank! Ihre Nachricht wurde gesendet.';
+    } catch {
+      formStatus.textContent = 'Der Versand konnte nicht bestätigt werden. Bitte versuchen Sie es erneut oder schreiben Sie an office@hartholz.at.';
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 </script>
 </body>
